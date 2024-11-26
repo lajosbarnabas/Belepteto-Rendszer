@@ -26,7 +26,8 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     const su: Solution = new Solution("bedat.txt");
 
     res.write(`2.feladat \nAz első tanuló ${su.firstStudentToEnter.time}-kor lépett be a főkapun.\n`);
-    res.write(`Az utolsó tanuló ${su.lastStudentToLeave.time}-kor lépett ki a főkapun.`);
+    res.write(`Az utolsó tanuló ${su.lastStudentToLeave.time}-kor lépett ki a főkapun.\n`);
+    res.write(`4.feladat \nA menzán aznap ${su.studentsOnLunch} tanuló ebédelt.`);
 
     su.studentToEnterBetweenTime("kesok.txt");
 
