@@ -53,6 +53,22 @@ export default class Solution {
         return oneStudent;
     }
 
+    get booksRentedLibrary(): Student[] {
+        const rentedList: Map<string, Student> = new Map();
+        for (const currentStudent of this.#students) {
+            if (currentStudent.action == 4 && !rentedList.has(currentStudent.code)) {
+                rentedList.set(currentStudent.code, currentStudent);
+            }
+        }
+        return Array.from(rentedList.values());
+    }
+
+    get isLibraryMorePopular(): string {
+        const libraryCount = this.booksRentedLibrary.length;
+        const lunchCount = this.studentsOnLunch;
+        return libraryCount > lunchCount ? "Többen voltak, mint a menzán." : "Nem voltak többen, mint a menzán.";
+    }
+
     constructor(source: string) {
         fs.readFileSync(source)
             .toString()
