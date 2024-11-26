@@ -25,7 +25,7 @@ export default class Solution {
     #studentToEnterBetweenTime(): string {
         const out: string[] = [];
         for (const student of this.#students) {
-            if (student.timeSpan > 420 && student.timeSpan < 495) {
+            if (student.timeSpan > 470 && student.timeSpan < 495) {
                 out.push(`${student.time} `);
                 out.push(`${student.code}\n`);
             }
