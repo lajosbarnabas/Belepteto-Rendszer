@@ -4,6 +4,16 @@ import Student from "./Student";
 export default class Solution {
     #students: Student[] = [];
 
+    get studentsOnLunch(): number {
+        let count: number = 0;
+        for (const student of this.#students) {
+            if (student.action == 3) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     studentToEnterBetweenTime(fileName: string): void {
         try {
             fs.writeFileSync(fileName, this.#studentToEnterBetweenTime());
