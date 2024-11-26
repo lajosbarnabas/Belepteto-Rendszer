@@ -1,6 +1,7 @@
 ﻿import fs from "fs"; // https://nodejs.org/docs/latest-v14.x/api/fs.html
 import http from "http"; // https://nodejs.org/docs/latest-v14.x/api/http.html
 import url from "url"; // https://nodejs.org/docs/latest-v14.x/api/url.html
+import Solution from "./Solution";
 
 export default function content(req: http.IncomingMessage, res: http.ServerResponse): void {
     // favicon.ico kérés kiszolgálása:
@@ -20,11 +21,12 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     res.write("<title>Jedlik Ts Template</title>");
     res.write("</head>");
     res.write("<body><form><pre>");
-    const params = new url.URL(req.url as string, `http://${req.headers.host}/`).searchParams;
 
     // Kezd a kódolást innen -->
+    const su: Solution = new Solution("bedat.txt");
 
-    
+    res.write(`2.feladat \nAz első tanuló ${su.firstStudentToEnter.time}-kor lépett be a főkapun.\n`);
+    res.write(`Az utolsó tanuló ${su.lastStudentToLeave.time}-kor lépett ki a főkapun.`);
 
     // <---- Fejezd be a kódolást
 
