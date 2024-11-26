@@ -28,6 +28,8 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     res.write(`2.feladat \nAz első tanuló ${su.firstStudentToEnter.time}-kor lépett be a főkapun.\n`);
     res.write(`Az utolsó tanuló ${su.lastStudentToLeave.time}-kor lépett ki a főkapun.`);
 
+    su.studentToEnterBetweenTime("kesok.txt");
+
     // <---- Fejezd be a kódolást
 
     res.write("</pre></form></body></html>");
