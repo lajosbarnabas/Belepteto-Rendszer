@@ -69,6 +69,23 @@ export default class Solution {
         return libraryCount > lunchCount ? "Többen voltak, mint a menzán." : "Nem voltak többen, mint a menzán.";
     }
 
+    get bakeryStudents(): string[] {
+        const returned: Set<string> = new Set();
+        const arrived: Set<string> = new Set();
+        for (const student of this.#students) {
+            if ((student.action == 1 && student.timeSpan < 645) || (student.action == 2 && student.timeSpan >= 645 && student.timeSpan <= 660)) {
+                arrived.add(student.code);
+            }
+        }
+        for (const student of this.#students) {
+            if (!arrived.has(student.code) && student.action == 1 && student.timeSpan >= 650 && student.timeSpan <= 660) {
+                returned.add(student.code);
+            }
+        }
+
+        return Array.from(returned);
+    }
+
     constructor(source: string) {
         fs.readFileSync(source)
             .toString()
