@@ -4,6 +4,25 @@ import Student from "./Student";
 export default class Solution {
     #students: Student[] = [];
 
+    studentToEnterBetweenTime(fileName: string): void {
+        try {
+            fs.writeFileSync(fileName, this.#studentToEnterBetweenTime());
+        } catch (error) {
+            console.log(`Error: ${(error as Error).message}`);
+        }
+    }
+
+    #studentToEnterBetweenTime(): string {
+        const out: string[] = [];
+        for (const student of this.#students) {
+            if (student.timeSpan > 420 && student.timeSpan < 495) {
+                out.push(`${student.time} `);
+                out.push(`${student.code}\n`);
+            }
+        }
+        return out.join("");
+    }
+
     get lastStudentToLeave(): Student {
         let oneStudent: Student = this.#students[0];
         for (const currentStudent of this.#students) {
