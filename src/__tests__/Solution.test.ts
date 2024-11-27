@@ -1,5 +1,4 @@
 import Solution from "../Solution";
-import fs from "fs";
 import Student from "../Student";
 
 describe("Testing Solution class", () => {
@@ -14,13 +13,19 @@ describe("Testing Solution class", () => {
         expect(firstStudent).toBeInstanceOf(Student);
     });
 
-    test("The last student to leave", () =>{
+    test("The last student to leave", () => {
         const lastStudent = instance.lastStudentToLeave;
         expect(lastStudent).toBeInstanceOf(Student);
     });
 
-    test("The students on lunch test", () =>{
+    test("The students on lunch test", () => {
         const studentsOnLunch = instance.studentsOnLunch;
         expect(studentsOnLunch).toBe(82);
-    })
+    });
+
+    test("rented books from students from the library", () => {
+        const libraryRenters = instance.booksRentedLibrary;
+        expect(libraryRenters.length).toBe(76);
+        expect(libraryRenters).toContainEqual(expect.any(Student));
+    });
 });
