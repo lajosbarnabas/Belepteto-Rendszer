@@ -73,12 +73,12 @@ export default class Solution {
         const returned: Set<string> = new Set();
         const arrived: Set<string> = new Set();
         for (const student of this.#students) {
-            if ((student.action == 1 && student.timeSpan < 645) || (student.action == 2 && student.timeSpan >= 645 && student.timeSpan <= 660)) {
+            if (student.action == 1 && student.timeSpan < 645) {
                 arrived.add(student.code);
             }
         }
         for (const student of this.#students) {
-            if (!arrived.has(student.code) && student.action == 1 && student.timeSpan >= 650 && student.timeSpan <= 660) {
+            if ((arrived.has(student.code) && student.action == 1 && student.timeSpan >= 650 && student.timeSpan <= 660) || (student.action == 2 && student.timeSpan >= 645 && student.timeSpan <= 660)) {
                 returned.add(student.code);
             }
         }
