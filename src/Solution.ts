@@ -86,6 +86,33 @@ export default class Solution {
         return Array.from(returned);
     }
 
+    studentTimeSpent(code: string): string {
+        let firstEntryTime = -1;
+        let lastExitTime = -1;
+
+        for (const student of this.#students) {
+            if (student.code === code && student.action === 1) {
+                if (firstEntryTime === -1) {
+                    firstEntryTime = student.timeSpan;
+                }
+            }
+
+            if (student.code === code && student.action === 2) {
+                lastExitTime = student.timeSpan;
+            }
+        }
+
+        if (firstEntryTime === -1 || lastExitTime === -1) {
+            return `Ilyen azonosítójú tanuló aznap nem volt az iskolában.`;
+        }
+
+        const totalMinutes = lastExitTime - firstEntryTime;
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        return `A tanuló érkezése és távozása között ${hours} óra ${minutes} perc telt el.`;
+    }
+
     constructor(source: string) {
         fs.readFileSync(source)
             .toString()

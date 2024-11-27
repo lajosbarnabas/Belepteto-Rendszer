@@ -21,6 +21,7 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     res.write("<title>Jedlik Ts Template</title>");
     res.write("</head>");
     res.write("<body><form><pre>");
+    const params = new url.URL(req.url as string, `http://${req.headers.host}/`).searchParams;
 
     // Kezd a kódolást innen -->
     const su: Solution = new Solution("bedat.txt");
@@ -29,8 +30,12 @@ export default function content(req: http.IncomingMessage, res: http.ServerRespo
     res.write(`Az utolsó tanuló ${su.lastStudentToLeave.time}-kor lépett ki a főkapun.\n`);
     su.studentToEnterBetweenTime("kesok.txt");
     res.write(`4.feladat \n A menzán aznap ${su.studentsOnLunch} tanuló ebédelt. \n`);
-    res.write(`5.feladat \n Aznap ${su.booksRentedLibrary.length} tanuló kölcsönzött a könyvtárból \n ${su.isLibraryMorePopular}`);
-    res.write(`Az érintett tanulók: \n ${su.bakeryStudents}`);
+    res.write(`5.feladat \n Aznap ${su.booksRentedLibrary.length} tanuló kölcsönzött a könyvtárból \n ${su.isLibraryMorePopular} \n`);
+    res.write(`6.feladat: \n Az érintett tanulók: \n ${su.bakeryStudents} \n`);
+
+    const inputCode: string = params.get("code") as string;
+
+    res.write(`<input type='text' name='code' value=${inputCode} style='max-width:100px;' onChange='this.form.submit();'> \n7.feladat:  Egy tanuló azonosítója=${su.studentTimeSpent(inputCode)} \n`);
     // <---- Fejezd be a kódolást
 
     res.write("</pre></form></body></html>");
